@@ -36,121 +36,121 @@
 </template>
 
 <script>
-import axios from 'axios'
+  import axios from 'axios'
 
-export default {
-  name: 'FormCategoria',
-  props: {
-    msg: String
-  },
-  data(){
-    return {id:0, nome:"",formOn:false, 
-    categorias:[]}
-  },
-  methods:{
-    mostrarForm(flag)
-    {
-      this.formOn=flag;
+  export default {
+    name: 'FormCategoria',
+    props: {
+      msg: String
     },
-    gravar(){
-      const url = 'http://localhost:8080/apis/categoria';
-      const data = {id:this.id, nome: this.nome};
-      axios.post(url, data)
-      .then(response => {
-        this.carregarDados();
-      })
-      .catch(error => {
-        alert('Erro:', error);
-      });
-      this.mostrarForm(false);
+    data(){
+      return {id:0, nome:"",formOn:false, 
+      categorias:[]}
     },
+    methods:{
+      mostrarForm(flag)
+      {
+        this.formOn=flag;
+      },
+      gravar(){
+        const url = 'http://localhost:8080/apis/categoria';
+        const data = {id:this.id, nome:this.nome};
+        axios.post(url, data)
+        .then(response => {
+          this.carregarDados();
+        })
+        .catch(error => {
+          alert('Erro:', error);
+        });
+        this.mostrarForm(false);
+      },
 
-    apagar(id){
-      axios.delete("https://localhost:8080/apis/categoria/"+id)
-      .then(result => {this.carregarDados()})
-      .catch(error=>{alert(error)})
-    },
+      apagar(id){
+        axios.delete("https://localhost:8080/apis/categoria/"+id)
+        .then(result => {this.carregarDados()})
+        .catch(error=>{alert(error)})
+      },
 
-    alterar(id){
-      formOn=true;
-      axios.get("http://localhost:8080/apis/categoria/"+id)
-      .then(result=>{
-        const categoria=result.data;
-        this.id})
-      .catch(error=>{alert(error)})
-    },
+      alterar(id){
+        formOn=true;
+        axios.get("http://localhost:8080/apis/categoria/"+id)
+        .then(result=>{
+          const categoria=result.data;
+          this.id})
+        .catch(error=>{alert(error)})
+      },
 
-    carregarDados(){
-      axios.get("http://localhost:8080/apis/categoria")
-      .then(result=>{this.categorias=result.data})
-      .catch(error=>{alert(error)})
+      carregarDados(){
+        axios.get("http://localhost:8080/apis/categoria")
+        .then(result=>{this.categorias=result.data})
+        .catch(error=>{alert(error)})
+      }
+    },
+    mounted(){
+      this.carregarDados();
     }
-  },
-  mounted(){
-    this.carregarDados();
   }
-}
 </script>
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style scoped>
-input[type=text],
-select {
-  width: 100%;
-  padding: 12px 20px;
-  margin: 8px 0;
-  display: inline-block;
-  border: 1px solid #ccc;
-  border-radius: 4px;
-  box-sizing: border-box;
-}
+  input[type=text],
+  select {
+    width: 100%;
+    padding: 12px 20px;
+    margin: 8px 0;
+    display: inline-block;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    box-sizing: border-box;
+  }
 
-input[type=submit] {
-  width: 100%;
-  background-color: #4CAF50;
-  color: white;
-  padding: 14px 20px;
-  margin: 8px 0;
-  border: none;
-  border-radius: 4px;
-  cursor: pointer;
-}
+  input[type=submit] {
+    width: 100%;
+    background-color: #4CAF50;
+    color: white;
+    padding: 14px 20px;
+    margin: 8px 0;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+  }
 
-input[type=submit]:hover {
-  background-color: #45a049;
-}
+  input[type=submit]:hover {
+    background-color: #45a049;
+  }
 
-div {
-  border-radius: 5px;
-  background-color: #f2f2f2;
-  padding: 20px;
-}
+  div {
+    border-radius: 5px;
+    background-color: #f2f2f2;
+    padding: 20px;
+  }
 
-#customers {
-  font-family: Arial, Helvetica, sans-serif;
-  border-collapse: collapse;
-  width: 100%;
-}
+  #customers {
+    font-family: Arial, Helvetica, sans-serif;
+    border-collapse: collapse;
+    width: 100%;
+  }
 
-#customers td,
-#customers th {
-  border: 1px solid #ddd;
-  padding: 8px;
-}
+  #customers td,
+  #customers th {
+    border: 1px solid #ddd;
+    padding: 8px;
+  }
 
-#customers tr:nth-child(even) {
-  background-color: #f2f2f2;
-}
+  #customers tr:nth-child(even) {
+    background-color: #f2f2f2;
+  }
 
-#customers tr:hover {
-  background-color: #ddd;
-}
+  #customers tr:hover {
+    background-color: #ddd;
+  }
 
-#customers th {
-  padding-top: 12px;
-  padding-bottom: 12px;
-  text-align: left;
-  background-color: #04AA6D;
-  color: white;
-}
+  #customers th {
+    padding-top: 12px;
+    padding-bottom: 12px;
+    text-align: left;
+    background-color: #04AA6D;
+    color: white;
+  }
 </style>
